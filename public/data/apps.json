@@ -1,0 +1,17 @@
+
+[
+  {
+    "id": 1,
+    "name": "EAIB Battle Simulator",
+    "description": "Generate engaging and dynamic stories from AI-driven battle simulations. Craft the narrative of your conflicts with the power of generative AI.",
+    "image": "https://placehold.co/600x400.png",
+    "data_ai_hint": "battle simulation"
+  },
+  {
+    "id": 2,
+    "name": "MotivaBot AI Companion",
+    "description": "Your personal conversational AI. Summarize messages, get context-aware replies, and streamline your communication with an intelligent assistant.",
+    "image": "https://placehold.co/600x400.png",
+    "data_ai_hint": "ai companion"
+  }
+]
