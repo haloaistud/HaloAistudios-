@@ -18,7 +18,7 @@ interface AppCardProps {
 
 export function AppCard({ app, isUpcoming = false }: AppCardProps) {
   return (
-    <Card className={`flex flex-col h-full transition-transform hover:scale-105 ${isUpcoming ? 'opacity-60' : ''}`}>
+    <Card className={`flex flex-col h-full transition-transform hover:scale-105 bg-card/50 backdrop-blur-sm ${isUpcoming ? 'opacity-60' : ''}`}>
       <CardHeader>
         <CardTitle>{app.name}</CardTitle>
         <CardDescription>{app.description}</CardDescription>

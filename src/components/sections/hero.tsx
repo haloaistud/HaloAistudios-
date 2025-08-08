@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -13,17 +14,17 @@ export function Hero() {
       </div>
       <div className="container mx-auto text-center relative">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground">
-          Innovate. Automate. Elevate.
+          Innovating Tomorrow’s AI, Today
         </h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-          Welcome to the nexus of next-generation AI applications. Explore our suite of tools designed to push the boundaries of creativity and efficiency.
+          AI-powered tools for creativity, automation, and storytelling
         </p>
         <div className="mt-8">
           <Button size="lg" asChild>
-            <a href="#features">
+            <Link href="/showcase">
               Explore Our Apps
               <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

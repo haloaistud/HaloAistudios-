@@ -1,26 +1,26 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Bot, Swords, Mic } from "lucide-react";
-import { MotivaBot } from "../ai/motivabot";
-import { BattleSimulator } from "../ai/battle-simulator";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 const features = [
   {
+    slug: "eaib",
     icon: <Swords className="h-8 w-8 text-primary" />,
     title: "EAIB Battle Simulator",
-    description: "Generate engaging and dynamic stories from AI-driven battle simulations. Craft the narrative of your conflicts with the power of generative AI.",
-    component: <BattleSimulator />,
+    description: "Epic AI Battle system with real-time simulation and dynamic storytelling.",
   },
   {
+    slug: "motivabot",
     icon: <Bot className="h-8 w-8 text-primary" />,
     title: "MotivaBot AI Companion",
-    description: "Your personal conversational AI. Summarize messages, get context-aware replies, and streamline your communication with an intelligent assistant.",
-    component: <MotivaBot />,
+    description: "Personalized motivation, NLP analysis, and speech synthesis.",
   },
   {
+    slug: "superstar-broadcast-hub",
     icon: <Mic className="h-8 w-8 text-primary" />,
     title: "Superstar Broadcast Hub",
-    description: "The ultimate tool for streamers and content creators. Manage your broadcasts, engage with your audience, and grow your channel like never before.",
-    component: null,
+    description: "Multi-channel live streaming with audience interaction.",
   },
 ];
 
@@ -36,9 +36,9 @@ export function Features() {
             Discover the tools that are shaping the future of digital interaction.
           </p>
         </div>
-        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-          {features.slice(0,2).map((feature, index) => (
-            <Card key={index} className="bg-card/50 backdrop-blur-lg border-border/50">
+        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <Card key={index} className="bg-card/50 backdrop-blur-lg border-border/50 flex flex-col">
               <CardHeader>
                 <div className="flex items-center gap-4">
                   {feature.icon}
@@ -46,22 +46,21 @@ export function Features() {
                 </div>
                 <CardDescription className="pt-2">{feature.description}</CardDescription>
               </CardHeader>
-              <CardContent>
-                {feature.component}
+              <CardContent className="mt-auto">
+                 <Button asChild className="w-full">
+                    <Link href={`/showcase/${feature.slug}`}>View App</Link>
+                  </Button>
               </CardContent>
             </Card>
           ))}
-           <Card className="lg:col-span-2 bg-card/50 backdrop-blur-lg border-border/50">
-              <CardHeader>
-                <div className="flex items-center gap-4">
-                  {features[2].icon}
-                  <CardTitle className="text-2xl">{features[2].title}</CardTitle>
-                </div>
-                <CardDescription className="pt-2">{features[2].description}</CardDescription>
+           <Card className="lg:col-span-3 bg-card/50 backdrop-blur-lg border-border/50">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl">And many more to come...</CardTitle>
+                <CardDescription className="pt-2">Stay tuned for upcoming releases.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-40 flex items-center justify-center text-muted-foreground italic">
-                    Coming Soon
+                <div className="h-20 flex items-center justify-center text-muted-foreground italic">
+                    The future is building.
                 </div>
               </CardContent>
             </Card>

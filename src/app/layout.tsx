@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk } from 'next/font/google';
+import { Orbitron } from 'next/font/google';
 import { Toaster } from "@/components/ui/toaster"
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
 
-const spaceGrotesk = Space_Grotesk({
+const orbitron = Orbitron({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-orbitron',
 });
 
 export const metadata: Metadata = {
@@ -21,8 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={cn('min-h-screen bg-background font-sans antialiased', spaceGrotesk.variable)}>
-        {children}
+      <body className={cn('min-h-screen bg-background font-sans antialiased', orbitron.variable)}>
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
         <Toaster />
       </body>
     </html>
