@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -7,6 +8,7 @@ interface App {
   description: string;
   image: string;
   data_ai_hint: string;
+  slug: string;
 }
 
 interface AppCardProps {
@@ -16,7 +18,7 @@ interface AppCardProps {
 
 export function AppCard({ app, isUpcoming = false }: AppCardProps) {
   return (
-    <Card className={`flex flex-col ${isUpcoming ? 'opacity-60' : ''}`}>
+    <Card className={`flex flex-col h-full transition-transform hover:scale-105 ${isUpcoming ? 'opacity-60' : ''}`}>
       <CardHeader>
         <CardTitle>{app.name}</CardTitle>
         <CardDescription>{app.description}</CardDescription>

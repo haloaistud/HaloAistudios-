@@ -3,6 +3,7 @@
   {
     "id": 1,
     "name": "EAIB Battle Simulator",
+    "slug": "eaib",
     "description": "Generate engaging and dynamic stories from AI-driven battle simulations. Craft the narrative of your conflicts with the power of generative AI.",
     "image": "https://placehold.co/600x400.png",
     "data_ai_hint": "battle simulation"
@@ -10,8 +11,41 @@
   {
     "id": 2,
     "name": "MotivaBot AI Companion",
+    "slug": "motivabot",
     "description": "Your personal conversational AI. Summarize messages, get context-aware replies, and streamline your communication with an intelligent assistant.",
     "image": "https://placehold.co/600x400.png",
     "data_ai_hint": "ai companion"
+  },
+  {
+    "id": 4,
+    "name": "Retro Texting App",
+    "slug": "retro-texting-app",
+    "description": "A nostalgic texting application with a retro interface.",
+    "image": "https://placehold.co/600x400.png",
+    "data_ai_hint": "retro phone"
+  },
+  {
+    "id": 5,
+    "name": "Family Dynasty App",
+    "slug": "family-dynasty-app",
+    "description": "Build and manage your family's legacy through generations.",
+    "image": "https://placehold.co/600x400.png",
+    "data_ai_hint": "family tree"
+  },
+  {
+    "id": 6,
+    "name": "Box Charade App",
+    "slug": "box-charade-app",
+    "description": "A fun and interactive charades game for the whole family.",
+    "image": "https://placehold.co/600x400.png",
+    "data_ai_hint": "party game"
+  },
+  {
+    "id": 7,
+    "name": "Gay Social Site",
+    "slug": "gay-social-site",
+    "description": "A social networking platform for the LGBTQ+ community.",
+    "image": "https://placehold.co/600x400.png",
+    "data_ai_hint": "social community"
   }
 ]

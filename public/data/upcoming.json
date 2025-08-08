@@ -3,6 +3,7 @@
   {
     "id": 3,
     "name": "Superstar Broadcast Hub",
+    "slug": "superstar-broadcast-hub",
     "description": "The ultimate tool for streamers and content creators. Manage your broadcasts, engage with your audience, and grow your channel like never before.",
     "image": "https://placehold.co/600x400.png",
     "data_ai_hint": "live stream"
