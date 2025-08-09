@@ -28,11 +28,19 @@ export default function Home() {
     
     const pressKitBtn = document.getElementById('press-kit-btn');
     const handlePressKitClick = () => {
+      window.open('http://haloaistudios.free.site.pro/', '_blank');
+    };
+    
+    const readMoreBtn = document.getElementById('read-more-btn');
+    const handleReadMoreClick = () => {
       window.location.href = '/press-release/eaib-launch';
     };
 
     if (pressKitBtn) {
       pressKitBtn.addEventListener('click', handlePressKitClick);
+    }
+    if (readMoreBtn) {
+      readMoreBtn.addEventListener('click', handleReadMoreClick);
     }
     
     return () => {
@@ -41,6 +49,9 @@ export default function Home() {
       cleanupRevealAppCard();
       if (pressKitBtn) {
         pressKitBtn.removeEventListener('click', handlePressKitClick);
+      }
+      if (readMoreBtn) {
+        readMoreBtn.removeEventListener('click', handleReadMoreClick);
       }
     };
   }, []);
@@ -82,7 +93,8 @@ export default function Home() {
           <p>
             Epic AI Battle (EAIB), developed by Timothy D’Angelo under Halo AI Studios, officially launches today! This groundbreaking turn-based combat simulator brings legendary warriors, superheroes, and mythical beings together for high-stakes AI-driven battles. With deep strategic gameplay and dynamic AI narration, EAIB delivers an unparalleled combat experience where every decision matters.
           </p>
-          <button className="btn-contact" id="press-kit-btn">Read Full Press Release</button>
+          <button className="btn-contact" id="press-kit-btn">Try Epic AI Battle</button>
+          <button className="btn-contact" id="read-more-btn" style={{marginLeft: '1rem'}}>Read Full Press Release</button>
         </section>
 
         <section id="testimonial" aria-label="Testimonials">
@@ -185,3 +197,5 @@ export default function Home() {
     </>
   );
 }
+
+    
