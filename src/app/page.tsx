@@ -28,7 +28,7 @@ export default function Home() {
     
     const pressKitBtn = document.getElementById('press-kit-btn');
     const handlePressKitClick = () => {
-      alert('Press kit requests: Please email haloaistudios@proton.me');
+      alert('Press kit requests: Please email haloaistudios@gmail.com');
     };
 
     if (pressKitBtn) {
@@ -181,7 +181,7 @@ export default function Home() {
           <p>
             Have a question, a press inquiry, or an interesting collaboration idea? We'd love to hear from you. Reach out and let's connect.
             <br />
-            <b>Email:</b> <a href="mailto:haloaistudios@proton.me">haloaistudios@proton.me</a>
+            <b>Email:</b> <a href="mailto:haloaistudios@gmail.com">haloaistudios@gmail.com</a>
           </p>
         </section>
       </main>
