@@ -111,6 +111,10 @@ footer {
   text-align: center; padding: 1.5rem 1rem; font-size: 0.9rem; color: #6b7280; background: var(--bg-darker); margin-top: 3rem;
   user-select: none;
 }
+.payment-info {
+  font-weight: bold;
+  color: var(--primary-light);
+}
 @media (max-width:900px){main{padding:0 2rem;}}
 @media (max-width:700px){
   .app-showcase{flex-direction:column;align-items:center;}

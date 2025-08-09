@@ -55,6 +55,7 @@ export default function Home() {
           <a href="#press-release">Press Release</a>
           <a href="#testimonial">Testimonials</a>
           <a href="#showcase">Showcase</a>
+          <a href="#support">Support</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -100,6 +101,16 @@ export default function Home() {
           </p><cite>– NextGen Software Podcast</cite></div>
         </section>
 
+        <section id="feedback" aria-label="Customer Feedback">
+          <h2>Customer Feedback</h2>
+          <div className="testimonial"><p>
+            "The Motivabot app has completely changed my daily routine. I'm more organized and motivated than ever before. A must-have for anyone looking to boost productivity!"
+          </p><cite>– Alex R.</cite></div>
+          <div className="testimonial"><p>
+            "I'm blown away by the EAIB simulator. The narratives are so immersive and engaging. It's like having a professional writer for our game's battles."
+          </p><cite>– GameDev Studio</cite></div>
+        </section>
+
         <section id="showcase" aria-label="Project Showcase">
           <h2>/haloai-projects</h2>
           <div className="app-showcase">
@@ -139,6 +150,23 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </section>
+
+        <section id="support" aria-label="Support and Subscription">
+            <h2>Support & Subscription</h2>
+            <p>
+                Support our work and get access to all our applications with a simple one-time payment or subscription. Your contribution helps us continue to innovate and create powerful AI tools for everyone.
+            </p>
+            <h3>Just $1 for Full Access</h3>
+            <p>
+                A single payment of $1 grants you a lifetime subscription to all current and future apps from HaloAiStudios.
+            </p>
+            <h4>Payment Information:</h4>
+            <p>You can send your support through the following platforms:</p>
+            <ul>
+                <li><strong>Chime:</strong> <span className="payment-info">$the1tunchi</span></li>
+                <li><strong>PayPal:</strong> <span className="payment-info">The1tunchi</span></li>
+            </ul>
         </section>
 
         <section id="contact">
