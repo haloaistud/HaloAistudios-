@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect } from 'react';
@@ -28,7 +27,7 @@ export default function Home() {
     
     const pressKitBtn = document.getElementById('press-kit-btn');
     const handlePressKitClick = () => {
-      window.open('http://haloaistudios.free.site.pro/', '_blank');
+      window.open('https://haloaistudio.free.site.pro/', '_blank');
     };
     
     const readMoreBtn = document.getElementById('read-more-btn');
@@ -167,11 +166,11 @@ export default function Home() {
         <section id="support" aria-label="Support and Subscription">
             <h2>Support & Subscription</h2>
             <p>
-                Support our work and get access to all our applications with a simple one-time payment or subscription. Your contribution helps us continue to innovate, maintain our services, and create powerful AI tools for everyone.
+                Support our work and get access to all our applications with a simple one-time payment or subscription. Your contribution helps us continue to innovate, maintain our services, and offer new features.
             </p>
             <h3>Just $1 for Full Access</h3>
             <p>
-                A single payment of $1 grants you a lifetime subscription to all current and future apps from HaloAiStudios. This is a one-time fee to support our ongoing development. However, you can show genuine support by donating as much as you want.
+                A single payment of $1 grants you a lifetime subscription to all current and future apps from HaloAiStudios. This is a one-time fee to support our ongoing development. However, you can also opt for a monthly subscription for continued support and exclusive updates.
             </p>
             <h4>Payment Information:</h4>
             <p>You can send your support through the following platforms:</p>
@@ -197,5 +196,3 @@ export default function Home() {
     </>
   );
 }
-
-    
