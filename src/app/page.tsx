@@ -171,8 +171,8 @@ export default function Home() {
             <h4>Payment Information:</h4>
             <p>You can send your support through the following platforms:</p>
             <ul>
-                <li><strong>Chime:</strong> <span className="payment-info">$the1tunchi</span></li>
-                <li><strong>PayPal:</strong> <span className="payment-info">The1tunchi</span></li>
+                <li><strong>Chime:</strong> <a href="https://chime.com" target="_blank" rel="noopener noreferrer" className="payment-info">$the1tunchi</a></li>
+                <li><strong>PayPal:</strong> <a href="https://paypal.me/The1tunchi" target="_blank" rel="noopener noreferrer" className="payment-info">The1tunchi</a></li>
             </ul>
         </section>
 
