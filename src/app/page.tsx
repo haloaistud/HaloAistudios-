@@ -70,7 +70,7 @@ export default function Home() {
             <h3 className="member-name">Timothy Henton</h3>
             <p className="member-role">Lead Developer & Visionary Architect</p>
             <p>
-              Timothy Henton leads the technical development at HaloAiStudios, bringing over a decade of expertise in AI integration, scalable architecture, and immersive digital experiences. His passion for blending technology and creative innovation drives each project at HaloAiStudios.
+              Timothy Henton leads the technical development at HaloAiStudios, bringing over a decade of expertise in AI integration, scalable architecture, and immersive digital experiences. His passion for blending technology and creative innovation drives each project at HaloAiStudios. With a focus on ethical AI and user-centric design, Timothy is dedicated to building tools that are not only powerful but also accessible and beneficial to a global audience.
             </p>
           </div>
         </section>
@@ -83,10 +83,11 @@ export default function Home() {
           <ul>
             <li>Adaptive simulation systems and AI tools</li>
             <li>Modern web-apps for creativity, productivity, and social connection</li>
+            <li>AI-powered narrative generation for immersive storytelling</li>
             <li>Continuous roadmap for cross-platform and open-source support</li>
           </ul>
           <p>
-            "Our mission is to deliver experiences where advanced AI and smart software empower digital creators and connect people in new ways," says Timothy Henton, Lead Developer at HaloAiStudios.
+            "Our mission is to deliver experiences where advanced AI and smart software empower digital creators and connect people in new ways," says Timothy Henton, Lead Developer at HaloAiStudios. "We are building tools that we believe will redefine the future of digital interaction."
           </p>
           <button className="btn-contact" id="press-kit-btn">Request Press Kit</button>
         </section>
@@ -99,6 +100,9 @@ export default function Home() {
           <div className="testimonial"><p>
             "Each project is a showcase of smart design, utility, and creative challenge. Their AI work is pushing boundaries in games and tools alike."
           </p><cite>– NextGen Software Podcast</cite></div>
+          <div className="testimonial"><p>
+            "A truly innovative approach to AI software. The applications are not just functional, they are inspiring. Can't wait to see what they do next."
+          </p><cite>– Tech Frontier Magazine</cite></div>
         </section>
 
         <section id="feedback" aria-label="Customer Feedback">
@@ -109,6 +113,9 @@ export default function Home() {
           <div className="testimonial"><p>
             "I'm blown away by the EAIB simulator. The narratives are so immersive and engaging. It's like having a professional writer for our game's battles."
           </p><cite>– GameDev Studio</cite></div>
+           <div className="testimonial"><p>
+            "The subscription is a steal. For just $1, I get access to a growing suite of incredible AI tools. The value is insane."
+          </p><cite>– Sarah K.</cite></div>
         </section>
 
         <section id="showcase" aria-label="Project Showcase">
@@ -155,11 +162,11 @@ export default function Home() {
         <section id="support" aria-label="Support and Subscription">
             <h2>Support & Subscription</h2>
             <p>
-                Support our work and get access to all our applications with a simple one-time payment or subscription. Your contribution helps us continue to innovate and create powerful AI tools for everyone.
+                Support our work and get access to all our applications with a simple one-time payment or subscription. Your contribution helps us continue to innovate, maintain our services, and create powerful AI tools for everyone.
             </p>
             <h3>Just $1 for Full Access</h3>
             <p>
-                A single payment of $1 grants you a lifetime subscription to all current and future apps from HaloAiStudios.
+                A single payment of $1 grants you a lifetime subscription to all current and future apps from HaloAiStudios. This is a one-time fee to support our ongoing development.
             </p>
             <h4>Payment Information:</h4>
             <p>You can send your support through the following platforms:</p>
@@ -172,7 +179,8 @@ export default function Home() {
         <section id="contact">
           <h2>Contact</h2>
           <p>
-            For press, collabs, or feedback:<br />
+            Have a question, a press inquiry, or an interesting collaboration idea? We'd love to hear from you. Reach out and let's connect.
+            <br />
             <b>Email:</b> <a href="mailto:haloaistudios@proton.me">haloaistudios@proton.me</a>
           </p>
         </section>
