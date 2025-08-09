@@ -166,7 +166,7 @@ export default function Home() {
             </p>
             <h3>Just $1 for Full Access</h3>
             <p>
-                A single payment of $1 grants you a lifetime subscription to all current and future apps from HaloAiStudios. This is a one-time fee to support our ongoing development.
+                A single payment of $1 grants you a lifetime subscription to all current and future apps from HaloAiStudios. This is a one-time fee to support our ongoing development. However, you can show genuine support by donating as much as you want.
             </p>
             <h4>Payment Information:</h4>
             <p>You can send your support through the following platforms:</p>
