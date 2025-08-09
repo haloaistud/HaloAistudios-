@@ -28,7 +28,7 @@ export default function Home() {
     
     const pressKitBtn = document.getElementById('press-kit-btn');
     const handlePressKitClick = () => {
-      alert('Press kit requests: Please email haloaistudios@gmail.com');
+      window.location.href = '/press-release/eaib-launch';
     };
 
     if (pressKitBtn) {
@@ -77,19 +77,12 @@ export default function Home() {
 
         <section id="press-release">
           <h2>Press Release</h2>
-          <h3>HaloAiStudios Unveils a Suite of Next-Gen AI Projects</h3>
+          <h3>Epic AI Battle (EAIB) Launches March 7, 2025</h3>
           <p><strong>FOR IMMEDIATE RELEASE</strong></p>
-          <p><em>August 2023</em> – HaloAiStudios announces a new portfolio of AI-powered digital innovation across seven flagship projects, each designed to push the boundary between artificial intelligence, software, and interactive entertainment.</p>
-          <ul>
-            <li>Adaptive simulation systems and AI tools</li>
-            <li>Modern web-apps for creativity, productivity, and social connection</li>
-            <li>AI-powered narrative generation for immersive storytelling</li>
-            <li>Continuous roadmap for cross-platform and open-source support</li>
-          </ul>
           <p>
-            "Our mission is to deliver experiences where advanced AI and smart software empower digital creators and connect people in new ways," says Timothy Henton, Lead Developer at HaloAiStudios. "We are building tools that we believe will redefine the future of digital interaction."
+            Epic AI Battle (EAIB), developed by Timothy D’Angelo under Halo AI Studios, officially launches today! This groundbreaking turn-based combat simulator brings legendary warriors, superheroes, and mythical beings together for high-stakes AI-driven battles. With deep strategic gameplay and dynamic AI narration, EAIB delivers an unparalleled combat experience where every decision matters.
           </p>
-          <button className="btn-contact" id="press-kit-btn">Request Press Kit</button>
+          <button className="btn-contact" id="press-kit-btn">Read Full Press Release</button>
         </section>
 
         <section id="testimonial" aria-label="Testimonials">
