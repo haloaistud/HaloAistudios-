@@ -15,7 +15,7 @@ export default function EaibLaunchPage() {
                         <p><strong>FOR IMMEDIATE RELEASE</strong></p>
                         <p><strong>Contact:</strong> Timothy D’Angelo</p>
                         <p><strong>Email:</strong> <a href="mailto:haloaistudios@gmail.com" className="hover:underline">haloaistudios@gmail.com</a></p>
-                        <p><strong>Website:</strong> <a href="http://Haloaistudios.free.site.pro" target="_blank" rel="noopener noreferrer" className="hover:underline">Haloaistudios.free.site.pro</a></p>
+                        <p><strong>Website:</strong> <a href="https://haloaistudio.free.site.pro/" target="_blank" rel="noopener noreferrer" className="hover:underline">Haloaistudios.free.site.pro</a></p>
                         <p><strong>Date:</strong> Texas – March 7, 2025</p>
                     </div>
 
