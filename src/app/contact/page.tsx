@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Mail, Send, Twitter, Github, Linkedin } from "lucide-react";
+import { Mail, Send, Twitter, Github, Linkedin, Facebook } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -68,6 +68,7 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-center gap-6">
+                        <a href="https://facebook.com/angelAistudios" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors"><Facebook className="h-8 w-8" /></a>
                         <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter className="h-8 w-8" /></a>
                         <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Github className="h-8 w-8" /></a>
                         <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin className="h-8 w-8" /></a>

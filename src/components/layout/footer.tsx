@@ -11,6 +11,7 @@ export function Footer() {
           <Link href="/subscription#donate" className="text-sm text-accent hover:text-accent/80 transition-colors font-semibold">
             Donation Link
           </Link>
+          <a href="https://facebook.com/angelAistudios" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Facebook</a>
           <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Twitter</a>
           <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
           <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">LinkedIn</a>
