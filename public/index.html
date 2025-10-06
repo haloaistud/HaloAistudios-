@@ -1,40 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HaloAiStudios | Ultra Cyber Edition</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Halo AI Studios - Ultra Cyber Edition</title>
+  <meta name="description" content="Halo AI Studios (HaloAI-dev) offers cutting-edge web development services. Led by Timothy DeAngelo, we deliver generative app solutions and immersive cyberpunk web experiences." />
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="main.js" defer></script>
 </head>
 <body>
-  <canvas id="canvas-3d"></canvas>
-  <div class="scan-line"></div>
-  <div class="nav-container">
-    <div class="logo">⟨ HALO AI STUDIOS ⟩</div>
-    <div class="tabs">
-      <div class="tab active">Home</div>
-      <div class="tab">About</div>
-      <div class="tab">Pricing</div>
-      <div class="tab">Contact</div>
+  <canvas id="canvas-3d" aria-hidden="true"></canvas>
+  <div class="scan-line" aria-hidden="true"></div>
+
+  <header class="nav-container" role="banner">
+    <div class="container nav-inner">
+      <div class="logo" aria-label="Halo AI Studios">⟨ HALO AI STUDIOS ⟩</div>
+      <nav aria-label="Primary" class="primary-nav">
+        <button class="tab active" data-tab="home">Home</button>
+        <button class="tab" data-tab="portfolio">Portfolio</button>
+        <button class="tab" data-tab="presentation">Presentation</button>
+        <button class="tab" data-tab="stats">Stats</button>
+        <button class="tab" data-tab="pricing">Pricing</button>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <div class="content active">
-    <section class="hero-section">
-      <h1 class="hero-title">Ultra Cyber Edition</h1>
-      <p class="hero-subtitle">Modular AI Infrastructure</p>
-      <p class="hero-description">Built for remixability, onboarding, and legacy export.</p>
-      <a href="#" class="btn">Remix Me</a>
+  <main id="main" role="main">
+
+    <section id="home" class="content active">
+      <div class="container hero-section">
+        <h1 class="hero-title">Ultra Cyber Edition</h1>
+        <h2 class="hero-subtitle" data-text="Innovative Web Solutions, Generative Apps, AI-driven Design"> </h2>
+        <p class="hero-description">Halo AI Studios (HaloAI-dev) offers cutting-edge web development services. Led by Timothy DeAngelo, we deliver generative app solutions and immersive cyberpunk web experiences.</p>
+        <div class="cta-row">
+          <a class="btn" href="#portfolio">See Portfolio</a>
+          <a class="btn ghost" href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div class="container grid reveal-grid">
+        <article class="card reveal">
+          <div class="card-icon">🤖</div>
+          <h3 class="card-title">Generative Apps</h3>
+          <div class="card-tag">AI + Web</div>
+          <p class="card-description">Custom generative systems, dynamic UIs and procedural content pipelines.</p>
+          <button class="btn">Explore</button>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon">🎮</div>
+          <h3 class="card-title">Interactive Worlds</h3>
+          <div class="card-tag">Three.js</div>
+          <p class="card-description">3D experiences, data visualizations and WebGL storytelling.</p>
+          <button class="btn">Explore</button>
+        </article>
+      </div>
     </section>
-  </div>
 
-  <div class="content">About content here</div>
-  <div class="content">Pricing content here</div>
-  <div class="content">Contact content here</div>
+    <section id="portfolio" class="content">
+      <div class="container">
+        <h2 class="section-title">Portfolio</h2>
+        <div class="portfolio-grid reveal-grid">
+          <div class="portfolio-card reveal" tabindex="0">
+            <img src="/assets/images/portfolio-example.jpg" alt="Epic AI Battle screenshot" class="portfolio-image">
+            <div class="portfolio-title">Epic AI Battle</div>
+            <p class="portfolio-description">Real-time neural opponents, procedurally generated arenas.</p>
+          </div>
+          <div class="portfolio-card reveal" tabindex="0">
+            <img src="/assets/images/motivabot.jpg" alt="Motivabot screenshot" class="portfolio-image">
+            <div class="portfolio-title">Motivabot</div>
+            <p class="portfolio-description">Conversational assistant focused on productivity and motivation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="presentation" class="content">
+      <div class="container">
+        <h2 class="section-title">Presentation</h2>
+        <div class="presentation-grid reveal-grid">
+          <div class="presentation-card reveal">
+            <h3>Live Demos</h3>
+            <p>Interactive demos and technical walkthroughs.</p>
+          </div>
+          <div class="presentation-card reveal">
+            <h3>Workshops</h3>
+            <p>Hands-on sessions for teams and developers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats" class="content">
+      <div class="container">
+        <h2 class="section-title">Stats</h2>
+        <div class="stats-grid reveal-grid">
+          <div class="stat-box reveal">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-box reveal">
+            <span class="stat-number">10k</span>
+            <span class="stat-label">Lines of AI code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="content">
+      <div class="container">
+        <h2 class="section-title">Pricing</h2>
+        <div class="pricing-grid reveal-grid">
+          <div class="pricing-card reveal">
+            <div class="price">$999</div>
+            <div class="price-label">Starter</div>
+            <ul class="pricing-features">
+              <li>Static site</li>
+              <li>Basic AI integration</li>
+            </ul>
+            <a class="btn">Choose</a>
+          </div>
+          <div class="pricing-card featured reveal">
+            <div class="price">$1999</div>
+            <div class="price-label">Pro</div>
+            <ul class="pricing-features">
+              <li>Web app</li>
+              <li>Custom AI components</li>
+            </ul>
+            <a class="btn">Choose</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="/assets/js/main.js"></script>
 </body>
-<link rel="stylesheet" href="style.css" />
-<script src="script.js" defer></script>
 </html>
-
