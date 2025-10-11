@@ -1,3 +1,7 @@
+/* ===============================================
+   HALO AI STUDIOS - MODULAR CSS
+   =============================================== */
+
 /* CSS Variables */
 :root {
     --gold-primary: #FFC107;
@@ -362,4 +366,4 @@ h1, h2, h3, h4 {
         transparent 100%);
     margin: 4rem auto;
     max-width: 600px;
-  }
+}
