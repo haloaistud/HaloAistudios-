@@ -1,241 +1,148 @@
-const DataModule = (() => {
-    // ERROR REFRACTION: API_KEY moved to App/Config Module for better management, but kept here for local context.
-    const API_KEY = ""; // Add your API key here
-    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent";
-    
-    const APP_DATA = [
-        { 
-            title: "Epic AI Battle (EAIB)", 
-            focus: "Dynamic AI Storytelling & Replayability", 
-            category: "Entertainment & Gaming", 
-            description: "Turn-based combat simulator with dynamic AI storytelling and narrated battles.",
-            img: "Epic+AI+Battle",
-            launch_date: "Mar 7, 2025"
-        },
-        { 
-            title: "Motivabot", 
-            focus: "Personalized AI Pep Talks & Goal Tracking", 
-            category: "Productivity & Creativity", 
-            description: "AI productivity assistant for personalized pep talks, reminders, and goal tracking. Seamlessly integrates with goal formation data.",
-            img: "Motivabot+Productivity"
-        },
-        { 
-            title: "Superstar Broadcast Hub", 
-            focus: "AI Moderation & Content Repurposing", 
-            category: "Social & Broadcasting", 
-            description: "Streaming/podcast toolkit with AI moderation, live engagement tools, and automatic content repurposing for social media.",
-            img: "Superstar+Hub"
-        },
-        { 
-            title: "Family Dynasty App", 
-            focus: "AI-Narrated Genealogy & Interactive Narrative", 
-            category: "Productivity & Creativity", 
-            description: "Build interactive family trees with AI-generated life stories, turning history into a shared narrative.",
-            img: "Family+Dynasty+Narrative"
-        },
-        { 
-            title: "Gay Social Site", 
-            focus: "Safe Conversation Filtering & Connection AI", 
-            category: "Social & Broadcasting", 
-            description: "Inclusive community platform ensuring safety with intelligent filtering and connection tools.",
-            img: "Gay+Social+Site+Inclusive"
-        },
-        { 
-            title: "Box Charade App", 
-            focus: "AI-Powered Multiplayer Charades", 
-            category: "Entertainment & Gaming", 
-            description: "AI-powered multiplayer charades with custom themed prompts and guessing games. Playable locally or online.",
-            img: "Box+Charade+App+Multiplayer"
-        },
-        { 
-            title: "Retro Texting App", 
-            focus: "Nostalgic Filters & Entertainment", 
-            category: "Entertainment & Gaming", 
-            description: "Chat in a nostalgic, early-2000s text message interface, complete with AI-enhanced filters, slang, and retro effects.",
-            img: "Retro+Texting+App"
-        }
-    ];
+// --- CORE JAVASCRIPT STRUCTURE ---
 
-    return {
-        getApps: () => APP_DATA,
-        getAppByIndex: (index) => APP_DATA[index],
-        getApiKey: () => API_KEY,
-        getApiUrl: () => API_URL
-    };
-})();
+// 1. THREE.JS PARTICLE BACKGROUND ANIMATION (Synchronization: Visual Immersion)
+// This script initializes a subtle 3D particle field (Tetrahedrons) in the background,
+// perfectly aligning with the 'Immersion' and '3D particle effects' design language.
+const canvas = document.getElementById('threejs-canvas');
+if (canvas) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 8;
 
-/* =====================
-   2. API MODULE (Refined)
-   ===================== */
-const APIModule = (() => {
-    const API_KEY = DataModule.getApiKey();
-    const API_URL = DataModule.getApiUrl();
+    const tetras = [];
+    const geometry = new THREE.TetrahedronGeometry(0.5, 0); // Geometric shapes for futuristic feel
 
-    /**
-     * Implements exponential backoff for API calls
-     */
-    async function exponentialBackoffFetch(url, options, maxRetries = 5) {
-        if (!API_KEY) {
-            console.error("API Error: API Key is not set in DataModule.");
-            throw new Error("API_KEY_MISSING");
-        }
-        
-        for (let i = 0; i < maxRetries; i++) {
-            try {
-                const response = await fetch(url, options);
-                // ERROR REFRACTION: Better handling for rate limiting (429) and server errors (5xx)
-                if (response.status === 429) {
-                     console.warn(`Rate limit hit. Retrying in ${Math.pow(2, i)} seconds...`);
-                     throw new Error(`API Rate Limit: ${response.status}`);
-                }
-                if (response.status >= 500) {
-                    throw new Error(`API Server Error: ${response.status}`);
-                }
-                return response;
-            } catch (error) {
-                if (error.message.includes("API_KEY_MISSING") || i === maxRetries - 1) throw error;
-                const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
-                await new Promise(resolve => setTimeout(resolve, delay));
-            }
-        }
+    for (let i = 0; i < 20; i++) {
+        const material = new THREE.MeshStandardMaterial({
+            color: 0xffd700, // Gold color
+            wireframe: true,
+            transparent: true,
+            opacity: 0.15 + Math.random() * 0.15, // Low opacity for subtle effect
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(
+            (Math.random() - 0.5) * 20,
+            (Math.random() - 0.5) * 20,
+            (Math.random() - 0.5) * 20
+        );
+        scene.add(mesh);
+        tetras.push(mesh);
     }
 
-    /**
-     * Makes a request to the Gemini API
-     */
-    async function callGeminiAPI(userQuery, systemInstruction) {
-        const payload = {
-            contents: [{ parts: [{ text: userQuery }] }],
-            systemInstruction: {
-                parts: [{ text: systemInstruction }]
-            },
-            tools: []
-        };
+    // Lighting (Golden Light Source)
+    scene.add(new THREE.AmbientLight(0x404040, 0.5));
+    const dirLight = new THREE.DirectionalLight(0xffd700, 0.6); // Golden directional light
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
 
-        const url = `${API_URL}?key=${API_KEY}`;
-
-        // ERROR REFRACTION: Centralized try/catch for robust error reporting
-        try {
-            const response = await exponentialBackoffFetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            const result = await response.json();
-            // ERROR REFRACTION: Checks for blocked or problematic responses
-            if (result.candidates?.[0]?.finishReason === 'SAFETY') {
-                return "AI Response Blocked: Safety filter engaged.";
-            }
-            
-            return result.candidates?.[0]?.content?.parts?.[0]?.text || "Error retrieving content: No text part found.";
-        } catch (error) {
-            console.error("Gemini API Request Failed:", error);
-            // Re-throw the error to be caught by the calling function (EventHandlersModule)
-            throw error; 
-        }
-    }
-
-    return {
-        generateInspiration: async () => {
-            const query = "Generate a single, original, powerful inspirational quote about the future, technology, and creativity, written in a dramatic, futuristic tone suitable for a world-class AI studio's tagline. The quote should be short.";
-            const instruction = "You are an AI poet and visionary architect for a cutting-edge studio.";
-            return await callGeminiAPI(query, instruction);
-        },
-
-        generateFeature: async (appTitle, appDescription) => {
-            const query = `Generate one short, innovative, AI-powered feature idea (max 15 words) for the app '${appTitle}'. Focus on enhancing ${appDescription}. The feature should demonstrate 'Replayability and Evolution'.`;
-            const instruction = "You are a Chief Innovation Officer. Provide only the feature idea itself, without introduction or quotation marks.";
-            return await callGeminiAPI(query, instruction);
-        },
-
-        analyzeVision: async (visionText) => {
-            const query = `Analyze the following Studio Blueprint for its core thematic focus and summarize it into one concise, professional sentence (max 20 words): "${visionText}"`;
-            const instruction = "You are a professional business consultant. Provide only the concise summary sentence itself, without any introductory phrases or quotation marks.";
-            return await callGeminiAPI(query, instruction);
-        }
-    };
-})();
-
-/* =====================
-   3. THREE.JS MODULE
-   ===================== */
-const ThreeJSModule = (() => {
-    let scene, camera, renderer, particles = [];
-
-    function init() {
-        const canvas = document.getElementById('three-canvas');
-        if (!canvas || typeof THREE === 'undefined') return;
-
-        // GSAP registration is needed if you want to use it for particle effects
-        if (typeof gsap !== 'undefined') gsap.registerPlugin(ScrollTrigger); 
-
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.z = 8;
-
-        createParticles();
-        setupLighting();
-        animate();
-        setupResizeHandler();
-    }
-    // ... (rest of the functions: createParticles, setupLighting, animate, setupResizeHandler are unchanged) ...
-    function createParticles() {
-        for (let i = 0; i < 50; i++) {
-            const geometry = new THREE.IcosahedronGeometry(0.3 + Math.random() * 0.5, 0);
-            const material = new THREE.MeshStandardMaterial({
-                color: 0xFFC107,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.3,
-                emissive: 0xFF9800,
-                emissiveIntensity: 0.5
-            });
-            const particle = new THREE.Mesh(geometry, material);
-            particle.position.set(
-                (Math.random() - 0.5) * 20,
-                (Math.random() - 0.5) * 20,
-                (Math.random() - 0.5) * 20
-            );
-            particles.push(particle);
-            scene.add(particle);
-        }
-    }
-
-    function setupLighting() {
-        scene.add(new THREE.AmbientLight(0x404040, 1.5));
-        const pointLight = new THREE.PointLight(0xFFEB3B, 2, 50);
-        pointLight.position.set(5, 5, 5);
-        scene.add(pointLight);
-    }
-
+    // Animation loop
     function animate() {
         requestAnimationFrame(animate);
-
-        particles.forEach((p, i) => {
-            p.rotation.x += 0.005 + i * 0.0001;
-            p.rotation.y += 0.008 + i * 0.0002;
-            p.position.y += Math.sin(Date.now() * 0.0005 + i) * 0.005;
+        tetras.forEach((t, i) => {
+            // Floating animation: slow, evolving rotation (Replayability & Evolution philosophy)
+            t.rotation.x += 0.005 + i * 0.0001;
+            t.rotation.y += 0.008 + i * 0.0002;
         });
-
         renderer.render(scene, camera);
     }
 
-    function setupResizeHandler() {
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+    animate();
+
+    // Handle responsiveness
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+}
+
+
+// 2. SMOOTH SCROLLING FOR NAVIGATION (Synchronization: UX Framework)
+// Used by the navigation links and Hero CTA buttons to smoothly scroll to sections.
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+
+// 3. APP DETAIL MODAL & CHECKOUT HANDLER (Synchronization: App Catalog & Pricing)
+// Handles the dynamic display of app information and initiates the checkout process.
+function showAppModal(appName) {
+    const appData = {
+        'epic-ai-battle': { title: 'Epic AI Battle', detail: 'The flagship AI combat simulator. Create unique units, design strategies, and watch the AI narrate the turn-based war. Ideal for streamers and content creators.', cta: 'Access EAIB' },
+        'motivabot': { title: 'Motivabot', detail: 'Your personal AI productivity coach. Provides tailored plans, accountability checks, and sends personalized pep talks directly to your device. Human-Centric AI in action.', cta: 'Start Coaching' },
+        'family-dynasty': { title: 'Family Dynasty', detail: 'Turns cold genealogy into a living narrative. Build your family tree and let our storytelling AI generate rich, interactive life stories for every member.', cta: 'Start Building' },
+        'broadcast-hub': { title: 'Superstar Broadcast Hub', detail: 'An all-in-one AI toolkit for content creators. Features real-time moderation, AI-driven engagement prompts, and easy content repurposing for social media.', cta: 'Go Live Now' },
+        'box-charade': { title: 'Box Charade', detail: 'The classic party game, supercharged by AI. Get dynamic, themed prompts for local or online multiplayer sessions. Never run out of ideas!', cta: 'Play Charades' },
+        'retro-texting': { title: 'Retro Texting App', detail: 'A fun, nostalgic trip back to the early 2000s. Chat with friends using retro UI, filters, and AI-generated slang and T9 predictions.', cta: 'Text Retro' },
+        'gay-social': { title: 'Gay Social Site', detail: 'A safe, inclusive community platform. Uses AI suggestions for meaningful connections, local events, and features robust, safe conversation filtering.', cta: 'Join Community' }
+    };
+
+    const data = appData[appName];
+    const modalId = 'app-modal';
+    
+    // Remove existing modal if it exists
+    const existingModal = document.getElementById(modalId);
+    if (existingModal) existingModal.remove();
+
+    const modal = document.createElement('div');
+    modal.id = modalId;
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+
+    const content = document.createElement('div');
+    // Using the 'glass-panel' class for the modal content
+    content.className = 'glass-panel'; 
+    content.style.cssText = 'max-width: 500px; text-align: center; margin: 20px;';
+    content.innerHTML = `
+        <h2 class="golden-text text-2xl mb-4 font-bold">${data.title}</h2>
+        <p class="text-gray-300 mb-6">${data.detail}</p>
+        <p class="text-sm text-yellow-400 mb-6">Full access is included with your $1 Lifetime Pass.</p>
+        <button class="cta-btn justify-center w-full mb-3" onclick="scrollToSection('pricing'); document.getElementById('${modalId}').remove();">${data.cta} (Get $1 Pass)</button>
+        <button class="cta-btn cta-btn-secondary justify-center w-full" onclick="document.getElementById('${modalId}').remove()">Close</button>
+    `;
+
+    modal.appendChild(content);
+    document.body.appendChild(modal);
+
+    // Fade in effect
+    setTimeout(() => {
+        modal.style.opacity = 1;
+    }, 10);
+}
+
+function checkout(plan) {
+    const message = plan === 'lifetime' 
+        ? "Redirecting you to the secure PayPal/Chime checkout for your **$1 Lifetime Access**. Welcome to the Studio!"
+        : "Redirecting you to the secure checkout for the $4.99/mo subscription. Welcome to the Studio!";
+    
+    // Create a temporary checkout confirmation modal
+    showAppModal('checkout-confirmation'); 
+    const modalContent = document.querySelector('#app-modal .glass-panel');
+    if (modalContent) {
+        modalContent.innerHTML = `
+            <h2 class="golden-text text-2xl mb-4 font-bold">Checkout Initiation</h2>
+            <p class="text-gray-300 mb-6">${message}</p>
+            <p class="text-sm text-yellow-400 mb-6">Please confirm your payment method (Chime or PayPal) on the next page.</p>
+            <a href="https://haloaistudios.com/checkout?plan=${plan}" target="_blank" class="cta-btn justify-center w-full">Proceed to Secure Payment</a>
+        `;
     }
-
-    return { init };
-})();
-
-/* =====================
+}
+=========
    4. PARTICLES MODULE
    ===================== */
 const ParticlesModule = (() => {
