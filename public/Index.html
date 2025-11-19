@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HaloAiStudios | Revolutionary AI Entertainment & Productivity Suite</title>
+<meta name="description" content="HaloAiStudios: AI-powered entertainment, productivity, and social apps. Lifetime $1 access or monthly subscription. Games, streaming, family trees, and more.">
+<meta name="keywords" content="AI apps, entertainment, productivity, streaming, gaming, SaaS">
+
+<!-- Tailwind CSS & Fonts -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+/* ===== GOLDEN AESTHETIC FOUNDATION ===== */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: #ffffff;
+  margin: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+#threejs-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Golden Gradient Text - Orbitron Family */
+.golden-text {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+}
+
+.golden-text-light {
+  background: linear-gradient(135deg, #FFE55C 0%, #FFB84D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass Morphism Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 0 25px 50px rgba(255, 215, 0, 0.25);
+  transform: translateY(-5px);
+}
+
+.glass-panel:hover::before {
+  opacity: 1;
+}
+
+/* Premium CTA Button */
+.cta-btn {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.cta-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 20px 45px rgba(255, 215, 0, 0.35);
+  background: linear-gradient(135deg, #FFA500, #FF8C00);
+}
+
+.cta-btn-secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  color: #FFD700;
+}
+
+.cta-btn-secondary:hover {
+  border-color: rgba(255, 215, 0, 1);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* Section Styling */
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  position: relative;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: #d0d0d0;
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Grid Layouts */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1300px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+}
+
+/* App Card */
+.app-card {
+  position: relative;
+  perspective: 1000px;
+}
+
+.app-card-inner {
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+.app-card:hover .app-card-inner {
+  transform: translateY(-8px);
+}
+
+.app-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.app-card p {
+  color: #b0b0b0;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: #FFD700;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+/* Feature Grid */
+.feature-item {
+  text-align: left;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Testimonial */
+.testimonial-card {
+  max-width: 500px;
+}
+
+.testimonial-card p:first-child {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #e0e0e0;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.testimonial-author {
+  font-weight: 600;
+  color: #FFD700;
+}
+
+/* Golden Ambient Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.08), transparent 70%),
+              radial-gradient(circle at 70% 60%, rgba(255, 165, 0, 0.06), transparent 70%),
+              radial-gradient(circle at 50% 80%, rgba(255, 140, 0, 0.05), transparent 70%);
+  z-index: 0;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  padding: 1rem 2rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1.5rem;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #FFD700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+  
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .section {
+    min-height: auto;
+    padding: 3rem 1.5rem;
+  }
+  
+  nav a {
+    margin: 0 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="flex justify-between items-center">
+  <div class="golden-text text-xl font-black">✨ HALOAISTUDIOS</div>
+  <div class="flex gap-8">
+    <a href="#apps">Apps</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#developers">For Devs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Three.js Canvas -->
+<canvas id="threejs-canvas"></canvas>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="section pt-32">
+  <div class="max-w-4xl">
+    <h1 class="section-title golden-text mb-6">
+      Revolutionary AI-Powered<br>Entertainment & Productivity Suite
+    </h1>
+    <p class="section-subtitle mb-8">
+      HaloAiStudios merges storytelling, innovation, and AI to amplify creativity and connection. From epic battles to family legacies—all powered by human-centric AI.
+    </p>
+    <div class="flex gap-4 justify-center flex-wrap">
+      <button class="cta-btn" onclick="scrollTo('apps')">Explore Apps</button>
+      <button class="cta-btn cta-btn-secondary" onclick="scrollTo('pricing')">Get $1 Lifetime Access</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPS SECTION ===== -->
+<section id="apps" class="section">
+  <h2 class="section-title golden-text mb-4">-- CORE APPS --</h2>
+  <p class="section-subtitle mb-12">Seven groundbreaking applications across Entertainment, Productivity, and Social platforms</p>
+  
+  <div class="grid-3">
+    <!-- Epic AI Battle -->
+    <div class="app-card glass-panel">
+      <div class="badge">Gaming & Entertainment</div>
+      <h3 class="golden-text">🎮 Epic AI Battle</h3>
+      <p>Real-time AI combat simulator with dynamic narration. Strategy meets storytelling.</p>
+      <p class="text-sm text-gray-400">🚀 Launch: March 7, 2025</p>
+      <button class="cta-btn text-sm" onclick="launchApp('epic-ai-battle')">Play Battle</button>
+    </div>
+
+    <!-- Motivabot -->
+    <div class="app-card glass-panel">
+      <div class="badge">Productivity</div>
+      <h3 class="golden-text">🤖 Motivabot</h3>
+      <p>AI productivity assistant for daily planning, reminders, and personalized motivation.</p>
+      <p class="text-sm text-gray-400">Always Available</p>
+      <button class="cta-btn text-sm" onclick="launchApp('motivabot')">Get Motivated</button>
+    </div>
+
+    <!-- Family Dynasty -->
+    <div class="app-card glass-panel">
+      <div class="badge">Creativity</div>
+      <h3 class="golden-text">👨‍👩‍👧‍👦 Family Dynasty</h3>
+      <p>Interactive family trees with AI-generated life stories and genealogical narratives.</p>
+      <p class="text-sm text-gray-400">Build Your Legacy</p>
+      <button class="cta-btn text-sm" onclick="launchApp('family-dynasty')">Start Tree</button>
+    </div>
+
+    <!-- Superstar Broadcast Hub -->
+    <div class="app-card glass-panel">
+      <div class="badge">Social & Broadcasting</div>
+      <h3 class="golden-text">🎙️ Superstar Broadcast Hub</h3>
+      <p>Streaming & podcast toolkit with AI moderation and real-time engagement tools.</p>
+      <p class="text-sm text-gray-400">Go Live</p>
+      <button class="cta-btn text-sm" onclick="launchApp('broadcast-hub')">Start Stream</button>
+    </div>
+
+    <!-- Box Charade -->
+    <div class="app-card glass-panel">
+      <div class="badge">Gaming & Entertainment</div>
+      <h3 class="golden-text">🎭 Box Charade</h3>
+      <p>AI-powered multiplayer charades with themed prompts for online and local play.</p>
+      <p class="text-sm text-gray-400">Play with Friends</p>
+      <button class="cta-btn text-sm" onclick="launchApp('box-charade')">Play Game</button>
+    </div>
+
+    <!-- Retro Texting -->
+    <div class="app-card glass-panel">
+      <div class="badge">Entertainment</div>
+      <h3 class="golden-text">📱 Retro Texting</h3>
+      <p>Nostalgic early-2000s messaging with retro filters, slang, and classic aesthetics.</p>
+      <p class="text-sm text-gray-400">Text Like It's 2005</p>
+      <button class="cta-btn text-sm" onclick="launchApp('retro-texting')">Send Retro</button>
+    </div>
+
+    <!-- Gay Social Site -->
+    <div class="app-card glass-panel">
+      <div class="badge">Social & Community</div>
+      <h3 class="golden-text">🌈 Gay Social Site</h3>
+      <p>Inclusive community platform with AI suggestions for events, connections, and safety.</p>
+      <p class="text-sm text-gray-400">Join Community</p>
+      <button class="cta-btn text-sm" onclick="launchApp('gay-social')">Join Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES SECTION ===== -->
+<section id="features" class="section">
+  <h2 class="section-title golden-text mb-4">-- WHY HALOAISTUDIOS --</h2>
+  <p class="section-subtitle mb-12">Built on a foundation of innovation, inclusivity, and human-centric AI</p>
+
+  <div class="grid-2">
+    <div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%230a0a0a' width='400' height='400'/%3E%3Ccircle cx='200' cy='200' r='150' fill='%23FFD700' opacity='0.1'/%3E%3Cpath d='M200 100 L300 300 L100 300 Z' fill='%23FFA500' opacity='0.2'/%3E%3C/svg%3E" alt="Golden AI" style="max-width: 100%;">
+    </div>
+    <div class="text-left">
+      <div class="feature-item mb-8">
+        <div class="feature-icon">✨</div>
+        <h3 class="golden-text text-xl mb-2">Human-Centric AI</h3>
+        <p class="text-gray-400">AI amplifies creativity and connection—it doesn't replace them.</p>
+      </div>
+      <div class="feature-item mb-8">
+        <div class="feature-icon">🎨</div>
+        <h3 class="golden-text text-xl mb-2">Golden Aesthetic</h3>
+        <p class="text-gray-400">Premium UI with gold, amber, glass morphism, and 3D particle effects.</p>
+      </div>
+      <div class="feature-item mb-8">
+        <div class="feature-icon">🌐</div>
+        <h3 class="golden-text text-xl mb-2">Inclusive Design</h3>
+        <p class="text-gray-400">Built for everyone. Safe, welcoming spaces across all platforms.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <h3 class="golden-text text-xl mb-2">Cutting-Edge Tech</h3>
+        <p class="text-gray-400">React, Vue, Node.js, GPT-style LLMs, and Vercel infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECH STACK SECTION ===== -->
+<section class="section">
+  <h2 class="section-title golden-text mb-4">-- BUILT WITH MODERN TECH --</h2>
+  <p class="section-subtitle mb-12">Enterprise-grade infrastructure powering next-generation AI applications</p>
+
+  <div class="grid-3">
+    <div class="glass-panel">
+      <h3 class="golden-text text-lg mb-3">Frontend</h3>
+      <p class="text-gray-400">React • Vue • Tailwind CSS • Three.js • Orbitron & Inter Fonts</p>
+    </div>
+    <div class="glass-panel">
+      <h3 class="golden-text text-lg mb-3">Backend & AI</h3>
+      <p class="text-gray-400">Node.js • GPT-Style LLMs • Real-Time APIs • WebSocket</p>
+    </div>
+    <div class="glass-panel">
+      <h3 class="golden-text text-lg mb-3">Deployment</h3>
+      <p class="text-gray-400">Vercel • Cloud CDN • GitHub MCP • CI/CD Automation</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING SECTION ===== -->
+<section id="pricing" class="section">
+  <h2 class="section-title golden-text mb-4">-- SIMPLE PRICING --</h2>
+  <p class="section-subtitle mb-12">Lifetime access or flexible monthly—your choice</p>
+
+  <div class="grid-2" style="max-width: 900px;">
+    <!-- Lifetime Plan -->
+    <div class="glass-panel">
+      <div class="badge">Most Popular</div>
+      <h3 class="golden-text text-3xl mb-2">$1</h3>
+      <p class="text-gray-400 mb-4">One-time payment</p>
+      <p class="text-lg font-bold mb-6">Lifetime Access</p>
+      <ul class="text-left text-gray-300 mb-8 space-y-2">
+        <li>✅ All 7 core apps</li>
+        <li>✅ Unlimited usage</li>
+        <li>✅ Future updates included</li>
+        <li>✅ Community access</li>
+        <li>✅ Priority support</li>
+      </ul>
+      <button class="cta-btn w-full justify-center" onclick="checkout('lifetime')">Get Lifetime Access</button>
+    </div>
+
+    <!-- Monthly Plan -->
+    <div class="glass-panel">
+      <div class="badge">Flexible</div>
+      <h3 class="golden-text text-3xl mb-2">$4.99</h3>
+      <p class="text-gray-400 mb-4">Per month</p>
+      <p class="text-lg font-bold mb-6">Monthly Subscription</p>
+      <ul class="text-left text-gray-300 mb-8 space-y-2">
+        <li>✅ All 7 core apps</li>
+        <li>✅ Unlimited usage</li>
+        <li>✅ Weekly new features</li>
+        <li>✅ Community access</li>
+        <li>✅ 24/7 support</li>
+      </ul>
+      <button class="cta-btn cta-btn-secondary w-full justify-center" onclick="checkout('monthly')">Subscribe Monthly</button>
+    </div>
+  </div>
+
+  <p class="text-gray-400 mt-8">💳 Payments via <strong>Chime</strong> or <strong>PayPal</strong> • Cancel anytime</p>
+</section>
+
+<!-- ===== TESTIMONIALS SECTION ===== -->
+<section class="section">
+  <h2 class="section-title golden-text mb-4">-- LOVED BY CREATORS --</h2>
+  <p class="section-subtitle mb-12">Hear from our community</p>
+
+  <div class="grid-2" style="max-width: 1000px;">
+    <div class="glass-panel testimonial-card">
+      <p>"HaloAiStudios transformed my creative workflow. The AI tools are intuitive and the Golden Aesthetic is absolutely stunning. Worth every penny!"</p>
+      <p class="testimonial-author">— Alex P., Content Creator</p>
+    </div>
+    <div class="glass-panel testimonial-card">
+      <p>"The inclusivity and human-centric approach really set this apart. Family Dynasty helped me connect with relatives in a whole new way."</p>
+      <p class="testimonial-author">— Morgan L., Genealogy Enthusiast</p>
+    </div>
+    <div class="glass-panel testimonial-card">
+      <p>"Epic AI Battle is my go-to for streaming. My audience loves the dynamic narration and strategy depth. A game-changer!"</p>
+      <p class="testimonial-author">— Jordan K., Twitch Streamer</p>
+    </div>
+    <div class="glass-panel testimonial-card">
+      <p>"Motivabot keeps me accountable with personalized pep talks. The UI feels premium and the AI actually understands my goals."</p>
+      <p class="testimonial-author">— Casey R., Productivity Enthusiast</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEVELOPER SECTION ===== -->
+<section id="developers" class="section">
+  <h2 class="section-title golden-text mb-4">-- FOR DEVELOPERS --</h2>
+  <p class="section-subtitle mb-12">Build on the HaloAiStudios ecosystem with powerful APIs and SDKs</p>
+
+  <div class="grid-3">
+    <div class="glass-panel">
+      <h3 class="golden-text text-xl mb-3">📚 Comprehensive Docs</h3>
+      <p class="text-gray-400 mb-4">Full API documentation, code samples, and integration guides.</p>
+      <button class="cta-btn text-sm" onclick="window.open('https://github.com/haloaistudios')">View GitHub</button>
+    </div>
+    <div class="glass-panel">
+      <h3 class="golden-text text-xl mb-3">🔧 GitHub MCP Integration</h3>
+      <p class="text-gray-400 mb-4">Repositories, issues, pull requests, actions, and code security toolsets.</p>
+      <button class="cta-btn text-sm" onclick="window.open('https://github.com/haloaistudios/github-mcp-server')">MCP Server</button>
+    </div>
+    <div class="glass-panel">
+      <h3 class="golden-text text-xl mb-3">🚀 Developer Community</h3>
+      <p class="text-gray-400 mb-4">Join our community, share ideas, and collaborate on innovations.</p>
+      <button class="cta-btn text-sm" onclick="window.open('https://discord.gg/haloaistudios')">Join Discord</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="py-12 text-center text-gray-400 border-t border-gray-800">
+  <p class="mb-2">HaloAiStudios © 2025 | Founded by Timothy Henton</p>
+  <p class="text-sm">Illuminating the intersection of AI, creativity, and human connection.</p>
+  <div class="flex justify-center gap-6 mt-6">
+    <a href="https://github.com/haloaistudios" target="_blank" class="hover:text-yellow-500 transition">GitHub</a>
+    <a href="https://twitter.com/haloaistudios" target="_blank" class="hover:text-yellow-500 transition">Twitter</a>
+    <a href="mailto:hello@haloaistudios.com" class="hover:text-yellow-500 transition">Email</a>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// ===== APP LAUNCHER =====
+function launchApp(appName) {
+  const appNames = {
+    'epic-ai-battle': 'Epic AI Battle',
+    'motivabot': 'Motivabot',
+    'family-dynasty': 'Family Dynasty',
+    'broadcast-hub': 'Superstar Broadcast Hub',
+    'box-charade': 'Box Charade',
+    'retro-texting': 'Retro Texting',
+    'gay-social': 'Gay Social Site'
+  };
+
+  const modal = document.createElement('div');
+  modal.id = 'app-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+  `;
+
+  const content = document.createElement('div');
+  content.className = 'glass-panel';
+  content.style.cssText = 'max-width: 500px; text-align: center; margin: 20px;';
+  content.innerHTML = `
+    <h2 class="golden-text text-2xl mb-4 font-bold">${appNames[appName]}</h2>
+    <p class="text-gray-300 mb-6">🚀 Initializing AI systems...</p>
+    <div class="w-full bg-gray-700 rounded-full h-2 mb-6">
+      <div class="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full" style="width: 0%; animation: progress 2s ease-in-out forwards;"></div>
+    </div>
+    <button class="cta-btn" onclick="closeModal()">Close</button>
+  `;
+
+  modal.appendChild(content);
+  document.body.appendChild(modal);
+
+  window.closeModal = () => {
+    if (document.getElementById('app-modal')) {
+      document.body.removeChild(modal);
+    }
+  };
+
+  setTimeout(() => {
+    if (document.getElementById('app-modal')) {
+      alert(`${appNames[appName]} would launch here!\n\nIn production, this routes to the actual app.`);
+      closeModal();
+    }
+  }, 3000);
+}
+
+// ===== CHECKOUT =====
+function checkout(plan) {
+  alert(`🎉 Redirecting to checkout for ${plan === 'lifetime' ? 'Lifetime ($1)' : 'Monthly ($4.99)'} plan...\n\nPayment methods: Chime or PayPal`);
+}
+
+// ===== SMOOTH SCROLL =====
+function scrollTo(section) {
+  const element = document.getElementById(section);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// ===== THREE.JS BACKGROUND =====
+const canvas = document.getElementById('threejs-canvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+camera.position.z = 8;
+
+// Create golden tetrahedrons
+const tetrahedrons = [];
+for (let i = 0; i < 15; i++) {
+  const geometry = new THREE.TetrahedronGeometry(0.3 + Math.random() * 0.2, 0);
+  const material = new THREE.MeshStandardMaterial({
+    color: 0xffd700,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.4 + Math.random() * 0.3,
+    emissive: 0xffa500,
+    emissiveIntensity: 0.3
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(
+    (Math.random() - 0.5) * 20,
+    (Math.random() - 0.5) * 20,
+    (Math.random() - 0.5) * 20
+  );
+  mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+  scene.add(mesh);
+  tetrahedrons.push({
+    mesh: mesh,
+    speedX: (Math.random() - 0.5) * 0.005,
+    speedY: (Math.random() - 0.5) * 0.005,
+    speedZ: (Math.random() - 0.5) * 0.005
+  });
+}
+
+// Lighting
+scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+const directionalLight = new THREE.DirectionalLight(0xffd700, 0.8);
+directionalLight.position.set(10, 10, 10);
+scene.add(directionalLight);
+
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+
+  tetrahedrons.forEach((item, i) => {
+    item.mesh.rotation.x += item.speedX + 0.002;
+    item.mesh.rotation.y += item.speedY + 0.003;
+    item.mesh.rotation.z += item.speedZ + 0.001;
+    item.mesh.position.y += Math.sin(Date.now() * 0.0005 + i) * 0.003;
+  });
+
+  camera.position.x = Math.sin(Date.now() * 0.0003) * 3;
+  camera.position.y = Math.cos(Date.now() * 0.0002) * 2;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+// Handle resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Add CSS animation for progress bar
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes progress {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
